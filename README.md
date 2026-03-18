@@ -102,6 +102,12 @@ Use [**4DGS Converter**](https://github.com/DazaiStudio/4dgs-converter) to conve
 
 ---
 
+## Issues
+
+Found a bug or have a question? [Open an issue](https://github.com/DazaiStudio/SplatRenderer-UEPlugin/issues) or email dazai.studio@gmail.com.
+
+---
+
 ## Author
 
 **Dazai Chen** — Creative Technologist & Lighting Designer
