@@ -75,7 +75,6 @@ Use [**4DGS Converter**](https://github.com/DazaiStudio/4dgs-converter) to conve
 
 - Unreal Engine 5.6
 - Windows (DirectX 12)
-- Blueprint project (no C++ required)
 
 ## License
 
