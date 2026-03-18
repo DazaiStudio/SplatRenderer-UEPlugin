@@ -2,14 +2,17 @@
   "FileVersion": 3,
   "Version": 1,
   "VersionName": "1.0",
-  "FriendlyName": "CS Gaussian Renderer",
-  "Description": "Compute Shader based 3D Gaussian Splatting renderer",
+  "FriendlyName": "Splat Renderer",
+  "Description": "3D/4D Gaussian Splatting renderer for Unreal Engine",
   "Category": "Rendering",
   "CreatedBy": "Dazai Studio",
+  "CreatedByURL": "https://github.com/DazaiStudio",
   "CanContainContent": true,
+  "EnabledByDefault": true,
+  "Installed": false,
   "Modules": [
     {
-      "Name": "CSGaussianRenderer",
+      "Name": "SplatRenderer",
       "Type": "Runtime",
       "LoadingPhase": "PostConfigInit"
     }
