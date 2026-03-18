@@ -28,15 +28,7 @@ git clone https://github.com/DazaiStudio/splat-renderer.git
 2. Extract the `SplatRenderer` folder
 3. Copy it into your UE project's `Plugins/` directory
 
-```
-YourProject/
-└── Plugins/
-    └── SplatRenderer/
-        ├── SplatRenderer.uplugin
-        ├── Binaries/
-        ├── Content/
-        └── Shaders/
-```
+![Install Folder](docs/install-folder.png)
 
 4. Open your project in UE 5.6
 
