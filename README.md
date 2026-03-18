@@ -67,13 +67,13 @@ Drag **BP_3DGS** or **BP_4DGS** into your level and configure in the **Details**
 
 Set `PLY File Path` to any standard 3DGS `.ply` file (COLMAP, Luma, PostShot, etc.)
 
-![BP_3DGS Details](docs/bp-3dgs-details.png)
+<img src="docs/bp-3dgs-details.png" alt="BP_3DGS Details" width="400">
 
 ### BP_4DGS — 4D Gaussian Splat Sequences
 
 Set `Sequence Path` to a `.gsd` file.
 
-![BP_4DGS Details](docs/bp-4dgs-details.png)
+<img src="docs/bp-4dgs-details.png" alt="BP_4DGS Details" width="400">
 
 | Property | Description |
 |----------|-------------|
