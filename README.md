@@ -29,14 +29,11 @@
 
 ## Getting Started
 
-### 1. Clone the Repository
+### 1. Download
 
-```bash
-cd "YourProject/Plugins"
-git clone https://github.com/DazaiStudio/splat-renderer.git
-```
+Download the latest release from the [**Releases**](https://github.com/DazaiStudio/SplatRenderer-UEPlugin/releases) page.
 
-Or download the [latest release](https://github.com/DazaiStudio/splat-renderer/releases) and extract `SplatRenderer` into your project's `Plugins/` directory.
+Extract `SplatRenderer` into your project's `Plugins/` directory.
 
 ![Install Folder](docs/install-folder.png)
 
