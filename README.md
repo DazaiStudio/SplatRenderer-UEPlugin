@@ -104,6 +104,12 @@ Use [**4DGS Converter**](https://github.com/DazaiStudio/4dgs-converter) to conve
 
 ---
 
+## Support
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-yellow?logo=buymeacoffee)](https://buymeacoffee.com/dazaistudio)
+
+---
+
 ## License
 
 All rights reserved. For evaluation and testing purposes only.
