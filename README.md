@@ -8,7 +8,7 @@
 ![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
 ![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red)
 
-![Plugin Browser](docs/plugin-browser.png)
+<img src="docs/plugin-browser.png" alt="Plugin Browser" width="500">
 
 ---
 
@@ -41,7 +41,7 @@ Download the latest release from the [**Releases**](https://github.com/DazaiStud
 
 Extract `SplatRenderer` into your project's `Plugins/` directory.
 
-![Install Folder](docs/install-folder.png)
+<img src="docs/install-folder.png" alt="Install Folder" width="500">
 
 ### 2. Open Your Project
 
@@ -49,13 +49,13 @@ Launch your project in Unreal Engine 5.6. The plugin will be loaded automaticall
 
 Verify in **Edit > Plugins** by searching for **Splat Renderer**.
 
-![Plugin Browser](docs/plugin-browser.png)
+<img src="docs/plugin-browser.png" alt="Plugin Browser" width="500">
 
 ### 3. Add to Level
 
 Open the **Content Browser** and navigate to **Plugins > Splat Renderer Content > Blueprints**.
 
-![Content Browser](docs/content-browser.png)
+<img src="docs/content-browser.png" alt="Content Browser" width="600">
 
 Drag **BP_3DGS** or **BP_4DGS** into your level and configure in the **Details** panel.
 
