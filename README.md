@@ -1,10 +1,8 @@
-<p align="center">
-  <img src="docs/logo.png" alt="Splat Renderer" width="200">
-</p>
+<img src="docs/logo.png" alt="Splat Renderer" width="200">
 
-<h1 align="center">Splat Renderer</h1>
+# Splat Renderer
 
-<p align="center">3D/4D Gaussian Splatting renderer plugin for Unreal Engine 5.6.</p>
+3D/4D Gaussian Splatting renderer plugin for Unreal Engine 5.6.
 
 ![UE](https://img.shields.io/badge/Unreal%20Engine-5.6-blue)
 ![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
