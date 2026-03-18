@@ -2,6 +2,10 @@
 
 3D/4D Gaussian Splatting renderer plugin for Unreal Engine 5.6.
 
+![UE](https://img.shields.io/badge/Unreal%20Engine-5.6-blue)
+![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
+![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red)
+
 ![Plugin Browser](docs/plugin-browser.png)
 
 ---
