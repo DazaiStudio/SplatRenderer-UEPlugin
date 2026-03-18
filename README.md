@@ -7,7 +7,7 @@
 ## Features
 
 - **BP_3DGS** — Render static 3D Gaussian Splats from `.ply` files
-- **BP_4DGS** — Play 4D Gaussian Splat sequences (`.bin` folders or `.gsd` compressed format)
+- **BP_4DGS** — Play 4D Gaussian Splat sequences (`.gsd` format)
 - OBB Crop Volume with draggable editor widget
 - Brightness and splat scale controls
 - WAV audio playback synced to sequence
@@ -49,13 +49,13 @@ Set `PLY File Path` to any standard `.ply` file (COLMAP, Luma, PostShot, etc.)
 
 ### BP_4DGS — 4D Gaussian Splat Sequences
 
-Set `Sequence Path` to a `.json` (raw bin folders) or `.gsd` (compressed) file.
+Set `Sequence Path` to a `.gsd` file.
 
 ![BP_4DGS Details](docs/bp-4dgs-details.png)
 
 | Property | Description |
 |----------|-------------|
-| Sequence Path | Path to `.json` or `.gsd` sequence file |
+| Sequence Path | Path to `.gsd` sequence file |
 | Audio Path | Optional WAV file for synced audio |
 | Playback Speed | 1.0 = normal speed |
 | Playback Mode | Loop or Once |
