@@ -64,7 +64,7 @@ See the [latest release notes](https://github.com/DazaiStudio/SplatRenderer-UEPl
 
 ## 4DGS Sequence
 
-Use [**4DGS Converter**](https://github.com/DazaiStudio/4dgs-converter) to convert 4DGS training output into `.gsd` files with LZ4 compression and random frame access.
+Use [**4DGS Converter**](https://github.com/DazaiStudio/4dgs-converter) to convert 4DGS training output into `.gsd` files.
 
 ---
 
