@@ -26,7 +26,7 @@
 
 - **3DGS** — Real-time rendering of static Gaussian Splats from `.ply` files
 - **4DGS** — Playback of 4D Gaussian Splat sequences (`.gsd` format)
-- **Crop Volume** — OBB crop box with draggable editor widget
+- **Crop Volume** — 3D crop box with draggable editor widget
 - **Rendering Controls** — Brightness, splat scale
 - **Audio** — WAV playback synced to sequence
 
