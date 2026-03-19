@@ -18,6 +18,7 @@
 - [Getting Started](#getting-started)
 - [4DGS Sequence](#4dgs-sequence)
 - [Requirements](#requirements)
+- [Support](#support)
 - [License](#license)
 
 ---
@@ -75,13 +76,9 @@ Use [**4DGS Converter**](https://github.com/DazaiStudio/4dgs-converter) to conve
 
 ---
 
-## Issues
+## Support
 
 Found a bug or have a question? [Open an issue](https://github.com/DazaiStudio/SplatRenderer-UEPlugin/issues) or email dazai.studio@gmail.com.
-
----
-
-## Support
 
 [Website](https://dazaistudio.com) | [GitHub](https://github.com/DazaiStudio) | [LinkedIn](https://www.linkedin.com/in/dazai-chen-280186183/)
 
