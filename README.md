@@ -1,9 +1,9 @@
 <p align="center">
   <img src="docs/logo.png" alt="Splat Renderer" width="200">
   <h1 align="center">Splat Renderer</h1>
-  <p align="center">3D/4D Gaussian Splatting renderer plugin for Unreal Engine 5.5 / 5.6 / 5.7</p>
+  <p align="center">3D/4D Gaussian Splatting renderer plugin for Unreal Engine 5.5+</p>
   <p align="center">
-    <img src="https://img.shields.io/badge/Unreal%20Engine-5.5%20|%205.6%20|%205.7-blue" alt="UE">
+    <img src="https://img.shields.io/badge/Unreal%20Engine-5.5+-blue" alt="UE">
     <img src="https://img.shields.io/badge/Platform-Windows-lightgrey" alt="Platform">
     <img src="https://img.shields.io/badge/License-All%20Rights%20Reserved-red" alt="License">
     <a href="https://github.com/DazaiStudio/SplatRenderer-UEPlugin/releases"><img src="https://img.shields.io/badge/Release-v1.0.1-green" alt="Release"></a>
@@ -75,7 +75,7 @@ Use [**4DGS Converter**](https://github.com/DazaiStudio/4dgs-converter) to conve
 
 ## Requirements
 
-- Unreal Engine 5.5, 5.6, or 5.7
+- Unreal Engine 5.5+
 - Windows (DirectX 12)
 
 ---
