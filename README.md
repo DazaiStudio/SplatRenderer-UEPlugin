@@ -81,14 +81,6 @@ Found a bug or have a question? [Open an issue](https://github.com/DazaiStudio/S
 
 ---
 
-## Author
-
-**Dazai Chen** — Creative Technologist & Lighting Designer
-
-[Website](https://dazaistudio.com) | [GitHub](https://github.com/DazaiStudio) | [LinkedIn](https://www.linkedin.com/in/dazai-chen-280186183/)
-
----
-
 ## Support
 
 <a href="https://buymeacoffee.com/dazaistudio"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200"></a>
