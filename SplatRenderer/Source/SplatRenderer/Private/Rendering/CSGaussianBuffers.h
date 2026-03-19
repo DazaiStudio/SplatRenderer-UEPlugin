@@ -3,6 +3,7 @@
 #include "RenderResource.h"
 #include "RHI.h"
 #include "RHIResources.h"
+#include "RHICommandList.h"
 
 namespace CSGaussian
 {

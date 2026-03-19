@@ -1,6 +1,7 @@
 # SplatRenderer Plugin Development
 
 ## Project Structure
+- **Local path:** `D:\Github\splatrenderer\` (renamed from csgs-release)
 - **Source code:** `SplatRenderer/Source/CSGaussianRenderer/` — active development here
 - **Shaders:** `SplatRenderer/Shaders/Private/`
 - **Binaries:** `SplatRenderer/Binaries/Win64/` (precompiled DLL for release)

@@ -1,5 +1,6 @@
 #include "CSGaussianPLYLoader.h"
 #include "Misc/FileHelper.h"
+#include "TextureResource.h"
 
 namespace CSGaussian
 {

@@ -7,7 +7,7 @@
 DECLARE_DELEGATE(FOnCropBoxExtentChanged);
 
 UCLASS()
-class CSGAUSSIANRENDERER_API UCSCropBoxComponent : public UBoxComponent
+class SPLATRENDERER_API UCSCropBoxComponent : public UBoxComponent
 {
     GENERATED_BODY()
 

@@ -34,54 +34,7 @@ void DispatchParticleFXPass(
     float TimeSeconds,
     float DeltaTime)
 {
-    check(Proxy);
-
-    FRHIBuffer* DPBuffer = Proxy->GetDisplacedPositionsBuffer();
-    FRHIBuffer* VelBuffer = Proxy->GetVelocitiesBuffer();
-    if (!DPBuffer || !VelBuffer) return;
-
-    // Transition buffers to UAV for compute write
-    RHICmdList.Transition({
-        FRHITransitionInfo(DPBuffer, ERHIAccess::Unknown, ERHIAccess::UAVCompute),
-        FRHITransitionInfo(VelBuffer, ERHIAccess::Unknown, ERHIAccess::UAVCompute)
-    });
-
-    const FGlobalShaderMap* GlobalShaderMap = GetGlobalShaderMap(GMaxRHIFeatureLevel);
-    TShaderRef<FCSGaussianParticleFXCS> Shader =
-        GlobalShaderMap->GetShader<FCSGaussianParticleFXCS>();
-
-    FCSGaussianParticleFXCS::FParameters Params;
-    Params.num_splats = Proxy->GetNumSplats();
-    Params.texture_width = Proxy->GetTextureWidth();
-    Params.first_frame = Proxy->IsParticleFXFirstFrame() ? 1 : 0;
-    Params.time_seconds = TimeSeconds;
-    Params.delta_time = DeltaTime;
-    Params.noise_amplitude = Proxy->FX_NoiseAmplitude;
-    Params.noise_frequency = Proxy->FX_NoiseFrequency;
-    Params.noise_speed = Proxy->FX_NoiseSpeed;
-    Params.wind_direction = Proxy->FX_WindDirection;
-    Params.wind_strength = Proxy->FX_WindStrength;
-    Params.gravity_strength = Proxy->FX_GravityStrength;
-    Params.attract_center = Proxy->FX_AttractCenter;
-    Params.attract_strength = Proxy->FX_AttractStrength;
-    Params.drag = Proxy->FX_Drag;
-    Params.vortex_axis = Proxy->FX_VortexAxis;
-    Params.vortex_center = Proxy->FX_VortexCenter;
-    Params.vortex_strength = Proxy->FX_VortexStrength;
-    Params.PositionTexture = Proxy->GetPositionTextureRHI();
-    Params.velocities = Proxy->GetVelocitiesUAV();
-    Params.displaced_positions = Proxy->GetDisplacedPositionsUAV();
-
-    FComputeShaderUtils::Dispatch(RHICmdList, Shader, Params,
-        FIntVector(CSGaussianCalcThreadGroups(Proxy->GetNumSplats()), 1, 1));
-
-    Proxy->ClearFXFirstFrame();
-
-    // Transition to SRV for downstream reads
-    RHICmdList.Transition({
-        FRHITransitionInfo(DPBuffer, ERHIAccess::UAVCompute, ERHIAccess::SRVMask),
-        FRHITransitionInfo(VelBuffer, ERHIAccess::UAVCompute, ERHIAccess::SRVMask)
-    });
+    // ParticleFX disabled in release build
 }
 
 FRDGPassRef DispatchDistancePass(

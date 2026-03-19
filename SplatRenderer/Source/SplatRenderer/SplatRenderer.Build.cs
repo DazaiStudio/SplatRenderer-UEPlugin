@@ -1,9 +1,9 @@
 using System.IO;
 using UnrealBuildTool;
 
-public class CSGaussianRenderer : ModuleRules
+public class SplatRenderer : ModuleRules
 {
-    public CSGaussianRenderer(ReadOnlyTargetRules Target) : base(Target)
+    public SplatRenderer(ReadOnlyTargetRules Target) : base(Target)
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 

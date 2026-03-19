@@ -2,6 +2,8 @@
 
 #include "CSGaussianBuffers.h"
 #include "PrimitiveSceneProxy.h"
+#include "SceneView.h"
+#include "Engine/Texture2D.h"
 
 class UCSGaussianComponent;
 

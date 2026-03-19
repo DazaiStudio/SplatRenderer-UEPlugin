@@ -8,7 +8,7 @@
 UCLASS(ClassGroup=(Rendering),
     HideCategories = (Rendering, Physics, Collision, Input, HLOD, Mobile, Navigation, VirtualTexture, ComponentTick, Tags, Cooking, LOD, ComponentReplication, Activation, Trigger, AssetUserData, Sockets),
     meta=(BlueprintSpawnableComponent, DisplayName="CS Gaussian Renderer"))
-class CSGAUSSIANRENDERER_API UCSGaussianComponent : public UPrimitiveComponent
+class SPLATRENDERER_API UCSGaussianComponent : public UPrimitiveComponent
 {
     GENERATED_BODY()
 

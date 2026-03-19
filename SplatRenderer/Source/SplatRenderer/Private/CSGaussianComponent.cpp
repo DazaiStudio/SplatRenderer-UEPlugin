@@ -1,6 +1,7 @@
 #include "CSGaussianComponent.h"
 #include "Rendering/CSGaussianSceneProxy.h"
 #include "RenderingThread.h"
+#include "TextureResource.h"
 
 UCSGaussianComponent::UCSGaussianComponent()
 {

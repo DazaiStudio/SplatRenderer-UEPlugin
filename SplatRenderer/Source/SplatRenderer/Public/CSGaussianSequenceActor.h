@@ -11,7 +11,7 @@
 
 UCLASS(HideCategories = (Input, HLOD, LOD, Cooking, DataLayers, Replication, WorldPartition, Networking),
     meta = (DisplayName = "CS Gaussian Sequence Actor"))
-class CSGAUSSIANRENDERER_API ACSGaussianSequenceActor : public AActor
+class SPLATRENDERER_API ACSGaussianSequenceActor : public AActor
 {
     GENERATED_BODY()
 

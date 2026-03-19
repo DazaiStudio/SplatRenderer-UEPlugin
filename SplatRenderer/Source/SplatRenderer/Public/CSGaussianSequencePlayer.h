@@ -4,6 +4,7 @@
 #include "Components/ActorComponent.h"
 #include "Engine/Texture2D.h"
 #include "Async/Future.h"
+#include "HAL/ThreadSafeBool.h"
 #include "CSGaussianSequencePlayer.generated.h"
 
 class UCSGaussianComponent;
@@ -69,7 +70,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCSSequenceComplete);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCSFrameChanged, int32, NewFrame);
 
 UCLASS(ClassGroup=(Rendering), meta=(BlueprintSpawnableComponent, DisplayName="CS Gaussian Sequence Player"))
-class CSGAUSSIANRENDERER_API UCSGaussianSequencePlayer : public UActorComponent
+class SPLATRENDERER_API UCSGaussianSequencePlayer : public UActorComponent
 {
     GENERATED_BODY()
 
@@ -78,25 +79,25 @@ public:
 
     // --- Properties (set by owning actor, hidden from editor) ---
 
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, Category = "GS Sequence")
     FFilePath SequencePath;
 
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, Category = "GS Playback")
     float PlaybackSpeed = 1.0f;
 
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, Category = "GS Playback")
     ECSPlaybackMode PlaybackMode = ECSPlaybackMode::Loop;
 
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, Category = "GS Playback")
     bool bAutoPlay = true;
 
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, Category = "GS Playback")
     int32 StartFrame = -1;
 
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, Category = "GS Playback")
     int32 EndFrame = -1;
 
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, Category = "GS Playback")
     int32 ScrubFrame = 0;
 
     // --- Events ---

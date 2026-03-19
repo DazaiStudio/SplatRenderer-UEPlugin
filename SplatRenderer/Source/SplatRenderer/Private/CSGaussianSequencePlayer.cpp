@@ -2,9 +2,12 @@
 #include "CSGaussianComponent.h"
 #include "CSGSDReader.h"
 #include "Misc/FileHelper.h"
+#include "Misc/Paths.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #include "Async/Async.h"
+#include "RenderingThread.h"
+#include "TextureResource.h"
 
 UCSGaussianSequencePlayer::UCSGaussianSequencePlayer()
 {

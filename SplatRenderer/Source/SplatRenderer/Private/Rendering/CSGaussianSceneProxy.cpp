@@ -1,6 +1,7 @@
 #include "CSGaussianSceneProxy.h"
 #include "CSGaussianComponent.h"
 #include "CSGaussianSubsystem.h"
+#include "TextureResource.h"
 
 namespace CSGaussian
 {

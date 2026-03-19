@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
-class FCSGaussianRendererModule : public IModuleInterface
+class FSplatRendererModule : public IModuleInterface
 {
 public:
     virtual void StartupModule() override;
