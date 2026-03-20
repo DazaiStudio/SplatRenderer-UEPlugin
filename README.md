@@ -5,7 +5,7 @@
   <p align="center">
     <img src="https://img.shields.io/badge/Unreal%20Engine-5.5+-blue" alt="UE">
     <img src="https://img.shields.io/badge/Platform-Windows-lightgrey" alt="Platform">
-    <img src="https://img.shields.io/badge/Status-Beta-orange" alt="Status">
+    <img src="https://img.shields.io/badge/License-Apache%202.0-blue" alt="License">
     <a href="https://github.com/DazaiStudio/SplatRenderer-UEPlugin/releases"><img src="https://img.shields.io/badge/Release-v1.0.1-green" alt="Release"></a>
   </p>
 </p>
@@ -75,4 +75,4 @@ Found a bug or have a question? [Open an issue](https://github.com/DazaiStudio/S
 
 ## License
 
-This plugin is currently in beta and provided as-is for evaluation and non-commercial use. All rights reserved.
+This project is licensed under the [Apache License 2.0](LICENSE).
