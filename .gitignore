@@ -14,3 +14,4 @@ ref/
 # Build output and release packages
 builds/
 release-packages/
+FilterPlugin.ini
