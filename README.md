@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/badge/Unreal%20Engine-5.5+-blue" alt="UE">
     <img src="https://img.shields.io/badge/Platform-Windows-lightgrey" alt="Platform">
     <img src="https://img.shields.io/badge/License-Apache%202.0-blue" alt="License">
-    <a href="https://github.com/DazaiStudio/SplatRenderer-UEPlugin/releases"><img src="https://img.shields.io/badge/Release-v1.0.1-green" alt="Release"></a>
+    <a href="https://github.com/DazaiStudio/SplatRenderer-UEPlugin/releases"><img src="https://img.shields.io/badge/Release-v1.1.0-green" alt="Release"></a>
   </p>
 </p>
 
@@ -33,6 +33,7 @@
 
 - **3DGS** — Real-time rendering of static Gaussian Splats from `.ply` files
 - **4DGS** — Playback of 4D Gaussian Splat sequences (`.gsd` format)
+- **Level Sequencer** — Keyframe Brightness, SplatScale, ScrubFrame, PlaybackSpeed, Crop and more in UE Sequencer
 - **Crop Volume** — 3D crop box with draggable editor widget
 - **Rendering Controls** — Brightness, splat scale
 - **Audio** — WAV playback synced to sequence
