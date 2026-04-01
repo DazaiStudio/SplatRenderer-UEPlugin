@@ -1,0 +1,118 @@
+#include "/Engine/Public/Platform.ush"
+#include "/Engine/Private/Random.ush"
+#include "CSGaussianCommon.ush"
+
+Texture2D<float4> PositionTexture;
+uint texture_width;
+uint num_splats;
+uint first_frame;
+float time_seconds;
+float delta_time;
+
+// Force parameters
+float noise_amplitude;
+float noise_frequency;
+float noise_speed;
+float3 wind_direction;
+float wind_strength;
+float gravity_strength;
+float3 attract_center;
+float attract_strength;
+float drag;
+float3 vortex_axis;
+float3 vortex_center;
+float vortex_strength;
+
+RWBuffer<float4> velocities;
+RWBuffer<float4> displaced_positions;
+
+[numthreads(THREAD_GROUP_SIZE_X, 1, 1)]
+void main(uint3 dispatch_thread_id : SV_DispatchThreadID)
+{
+    uint idx = dispatch_thread_id.x;
+    if (idx >= num_splats)
+        return;
+
+    float3 original_pos = ReadPosition(PositionTexture, idx, texture_width);
+
+    // Recover state
+    float3 velocity;
+    float3 offset;
+    if (first_frame)
+    {
+        velocity = float3(0, 0, 0);
+        offset = float3(0, 0, 0);
+    }
+    else
+    {
+        velocity = velocities[idx].xyz;
+        offset = displaced_positions[idx].xyz - original_pos;
+    }
+
+    // Accumulate forces
+    float3 force = float3(0, 0, 0);
+
+    // 1. Curl Noise (divergence-free via Jacobian Simplex)
+    if (noise_amplitude > 0.0)
+    {
+        float3 sample_pos = original_pos * noise_frequency;
+        sample_pos.x += time_seconds * noise_speed;
+        float3x4 J = JacobianSimplex_ALU(sample_pos, false, 0);
+        float3 curl = float3(J[1][2] - J[2][1], J[2][0] - J[0][2], J[0][1] - J[1][0]);
+        force += curl * noise_amplitude;
+    }
+
+    // 2. Wind (normalize direction to prevent magnitude from affecting strength)
+    if (wind_strength != 0.0)
+    {
+        float3 wd = normalize(wind_direction);
+        force += wd * wind_strength;
+    }
+
+    // 3. Gravity (Z-down in UE)
+    if (gravity_strength != 0.0)
+    {
+        force += float3(0, 0, -gravity_strength);
+    }
+
+    // 4. Attract/Repel (negative = repel)
+    if (attract_strength != 0.0)
+    {
+        float3 dir = attract_center - original_pos;
+        float dist = length(dir);
+        if (dist > 0.01)
+        {
+            force += (dir / dist) * attract_strength;
+        }
+    }
+
+    // 5. Vortex (tangential force around axis)
+    if (vortex_strength != 0.0)
+    {
+        float axisLen = length(vortex_axis);
+        if (axisLen > 0.001)
+        {
+            float3 to_pos = original_pos - vortex_center;
+            float3 axis = vortex_axis / axisLen;
+            float3 radial = to_pos - axis * dot(to_pos, axis);
+            float radialLen = length(radial);
+            if (radialLen > 0.01)
+            {
+                float3 tangent = cross(axis, radial / radialLen);
+                force += tangent * vortex_strength;
+            }
+        }
+    }
+
+    // Integrate velocity (clamp dt to prevent explosion on editor stalls)
+    float dt = min(delta_time, 0.1);
+    velocity += force * dt;
+    velocity *= max(1.0 - saturate(drag) * dt, 0.0);
+
+    // Integrate offset
+    offset += velocity * dt;
+
+    // Write outputs
+    velocities[idx] = float4(velocity, 0);
+    displaced_positions[idx] = float4(original_pos + offset, 1.0);
+}

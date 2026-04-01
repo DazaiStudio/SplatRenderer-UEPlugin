@@ -62,19 +62,27 @@ float3 ReadColorSH0(Texture2D<float4> tex, uint idx, uint tex_width)
 
 float3x3 ComputeCovariance(float4 q, float3 s)
 {
-    float x = q.x, y = q.y, z = q.z, w = q.w;
+    // Texture stores: q = (qz, qx, -qy, qw), s = (exp(s2), exp(s0), exp(s1)) * 100
+    // Recover COLMAP quaternion (x, y, z, w) and scale (s0, s1, s2)
+    float cx = q.y, cy = -q.z, cz = q.x, cw = q.w;
+    float3 cs = float3(s.y, s.z, s.x);
 
+    // Build rotation matrix in COLMAP space
     float3x3 R = float3x3(
-        1.0 - 2.0*(y*y + z*z), 2.0*(x*y - w*z),       2.0*(x*z + w*y),
-        2.0*(x*y + w*z),       1.0 - 2.0*(x*x + z*z),  2.0*(y*z - w*x),
-        2.0*(x*z - w*y),       2.0*(y*z + w*x),         1.0 - 2.0*(x*x + y*y)
+        1.0 - 2.0*(cy*cy + cz*cz), 2.0*(cx*cy - cw*cz),       2.0*(cx*cz + cw*cy),
+        2.0*(cx*cy + cw*cz),        1.0 - 2.0*(cx*cx + cz*cz), 2.0*(cy*cz - cw*cx),
+        2.0*(cx*cz - cw*cy),        2.0*(cy*cz + cw*cx),        1.0 - 2.0*(cx*cx + cy*cy)
     );
 
-    float3x3 M = float3x3(
-        R[0] * s,
-        R[1] * s,
-        R[2] * s
-    );
+    // Covariance in COLMAP space: CovC = R * diag(s^2) * R^T
+    float3x3 M = float3x3(R[0] * cs, R[1] * cs, R[2] * cs);
+    float3x3 CovC = mul(M, transpose(M));
 
-    return mul(M, transpose(M));
+    // Transform COLMAP→UE: (x,y,z) → (z, x, -y)
+    // Cov_UE = T * CovC * T^T
+    return float3x3(
+         CovC[2][2],  CovC[2][0], -CovC[2][1],
+         CovC[0][2],  CovC[0][0], -CovC[0][1],
+        -CovC[1][2], -CovC[1][0],  CovC[1][1]
+    );
 }

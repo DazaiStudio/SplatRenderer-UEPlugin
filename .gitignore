@@ -7,3 +7,14 @@ Saved/
 *.sdf
 *.VC.db
 *.VC.opendb
+
+# Third-party reference plugins (large binaries, not ours)
+ref/
+
+# Source code (private, not for public release)
+SplatRenderer/Source/
+
+# Build output and release packages
+builds/
+release-packages/
+FilterPlugin.ini
