@@ -2,6 +2,8 @@
 #include "CSGaussianCommon.ush"
 
 Texture2D<float4> PositionTexture;
+Buffer<float4> displaced_positions;
+uint use_displaced;
 uint texture_width;
 uint num_splats;
 float4x4 local_to_clip;
@@ -12,7 +14,7 @@ float4x4 crop_inv_rotation;
 
 RWBuffer<uint> indices;
 RWBuffer<uint> distances;
-RWBuffer<uint> visible_count;
+RWBuffer<uint> visible_count; // [0] = atomic visible splat count
 
 [numthreads(THREAD_GROUP_SIZE_X, 1, 1)]
 void main(uint3 dispatch_thread_id : SV_DispatchThreadID)
@@ -21,13 +23,17 @@ void main(uint3 dispatch_thread_id : SV_DispatchThreadID)
     if (idx >= num_splats)
         return;
 
-    float3 pos_local = ReadPosition(PositionTexture, idx, texture_width);
+    float3 pos_local = use_displaced
+        ? displaced_positions[idx].xyz
+        : ReadPosition(PositionTexture, idx, texture_width);
     float4 pos_clip = mul(float4(pos_local, 1.0), local_to_clip);
 
+    // Frustum culling: discard splats outside clip volume
     bool visible = !(pos_clip.x < -pos_clip.w || pos_clip.x > pos_clip.w ||
                      pos_clip.y < -pos_clip.w || pos_clip.y > pos_clip.w ||
                      pos_clip.z > pos_clip.w);
 
+    // Crop volume culling (OBB — oriented bounding box)
     if (enable_crop && visible)
     {
         float3 offset = pos_local - crop_center;

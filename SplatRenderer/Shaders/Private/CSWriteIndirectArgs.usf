@@ -1,14 +1,14 @@
 #include "/Engine/Public/Platform.ush"
 
 Buffer<uint> visible_count;
-RWBuffer<uint> indirect_args;
+RWBuffer<uint> indirect_args; // {VertexCount, InstanceCount, StartVertex, StartInstance}
 
 [numthreads(1, 1, 1)]
 void main(uint3 dispatch_thread_id : SV_DispatchThreadID)
 {
     uint count = visible_count[0];
-    indirect_args[0] = count * 6;
-    indirect_args[1] = 1;
-    indirect_args[2] = 0;
-    indirect_args[3] = 0;
+    indirect_args[0] = count * 6; // 6 vertices per splat (2 triangles)
+    indirect_args[1] = 1;         // 1 instance
+    indirect_args[2] = 0;         // start vertex
+    indirect_args[3] = 0;         // start instance
 }

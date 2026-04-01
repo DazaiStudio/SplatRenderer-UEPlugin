@@ -2,6 +2,8 @@
 #include "CSGaussianCommon.ush"
 
 Texture2D<float4> PositionTexture;
+Buffer<float4> displaced_positions;
+uint use_displaced;
 Texture2D<float4> Cov1Texture;
 Texture2D<float4> Cov2OpacityTexture;
 Texture2D<float4> RotationTexture;
@@ -22,8 +24,11 @@ void main(uint3 dispatch_thread_id : SV_DispatchThreadID)
     if (idx >= num_splats)
         return;
 
-    float3 posLocal = ReadPosition(PositionTexture, idx, texture_width);
+    float3 posLocal = use_displaced
+        ? displaced_positions[idx].xyz
+        : ReadPosition(PositionTexture, idx, texture_width);
 
+    // Get 3x3 covariance matrix: either pre-computed (PLY) or computed from rotation+scale (sequence)
     float3x3 covWorld;
     if (use_precomputed_cov)
     {
@@ -36,29 +41,35 @@ void main(uint3 dispatch_thread_id : SV_DispatchThreadID)
         covWorld = ComputeCovariance(quat, scale);
     }
 
+    // Apply static splat scale to covariance
     if (splat_scale != 1.0)
     {
         covWorld *= splat_scale * splat_scale;
     }
 
+    // Transform position to view space
     float3 posView = mul(float4(posLocal, 1.0), local_to_view).xyz;
 
+    // Behind camera
     if (posView.z <= 0.01)
     {
         transforms[idx] = float4(0, 0, 0, 0);
         return;
     }
 
+    // View matrix upper 3x3
     float3x3 viewRot = float3x3(
         local_to_view[0].xyz,
         local_to_view[1].xyz,
         local_to_view[2].xyz
     );
 
+    // Jacobian of perspective projection combined with view rotation
     float invDepth = 1.0 / posView.z;
     float offX = -posView.x * invDepth;
     float offY = -posView.y * invDepth;
 
+    // Rows of (J * viewRot)
     float3 jvRow0 = float3(
         viewRot[0][0] + offX * viewRot[0][2],
         viewRot[1][0] + offX * viewRot[1][2],
@@ -70,6 +81,7 @@ void main(uint3 dispatch_thread_id : SV_DispatchThreadID)
         viewRot[2][1] + offY * viewRot[2][2]
     );
 
+    // Projected covariance: covProj = (J*V) * covWorld * (J*V)^T
     float3 jvCov0 = mul(jvRow0, covWorld);
     float3 jvCov1 = mul(jvRow1, covWorld);
 
@@ -77,6 +89,7 @@ void main(uint3 dispatch_thread_id : SV_DispatchThreadID)
     float covProj01 = dot(jvCov0, jvRow1);
     float covProj11 = dot(jvCov1, jvRow1);
 
+    // Eigendecomposition of 2x2 projected covariance
     float detCov = covProj00 * covProj11 - covProj01 * covProj01;
     float traceCov = covProj00 + covProj11;
     float sqrtDisc = sqrt(max(traceCov * traceCov - 4.0 * detCov, 0.0));
@@ -84,11 +97,14 @@ void main(uint3 dispatch_thread_id : SV_DispatchThreadID)
     float2 eigenDoubled = float2(traceCov + sqrtDisc, traceCov - sqrtDisc);
     float2 eigenSqrtScaled = sqrt(max(eigenDoubled, float2(0.0, 0.0)));
 
+    // Primary eigenvector (with NaN guard for degenerate splats)
     float2 eigVecRaw = float2(covProj01, eigenDoubled.x * 0.5 - covProj00);
     float eigVecLen = length(eigVecRaw);
     float2 eigVec = (eigVecLen > 1e-6) ? eigVecRaw / eigVecLen : float2(1.0, 0.0);
 
+    // Final scale: 2*focal_length / depth * sqrt(2*eigenvalue)
     float2 splatScale = two_focal_length * invDepth * eigenSqrtScaled;
 
+    // 2x2 rotation+scale matrix packed as float4
     transforms[idx] = float4(eigVec.x, -eigVec.y, eigVec.y, eigVec.x) * splatScale.xyxy;
 }

@@ -3,6 +3,8 @@
 #include "CSGaussianCommon.ush"
 
 Texture2D<float4> PositionTexture;
+Buffer<float4> displaced_positions;
+uint use_displaced;
 Texture2D<float4> SH0Texture;
 Texture2D<float4> Cov2OpacityTexture;
 uint texture_width;
@@ -12,6 +14,7 @@ float4x4 local_to_world;
 Buffer<uint> sorted_indices;
 Buffer<float4> computed_transforms;
 
+// World-to-clip using UE translated world coordinates (LWC support)
 float4 CSGaussianWorldToClip(float3 worldPos)
 {
     ResolvedView = ResolveView();
@@ -32,12 +35,17 @@ void main(
 {
     uint gaussianIdx = sorted_indices[vertexID / 6];
 
-    float3 posLocal = ReadPosition(PositionTexture, gaussianIdx, texture_width);
+    // Read position and transform to world space
+    float3 posLocal = use_displaced
+        ? displaced_positions[gaussianIdx].xyz
+        : ReadPosition(PositionTexture, gaussianIdx, texture_width);
     float3 posWorld = mul(posLocal, (float3x3)local_to_world);
     float4 posClip = CSGaussianWorldToClip(posWorld);
 
+    // Get 2x2 transform from compute pass
     float4 splatTransform = computed_transforms[gaussianIdx];
 
+    // Skip invisible splats (transform is zero = culled in compute pass)
     if (dot(splatTransform, splatTransform) == 0.0 || posClip.w <= 0.0)
     {
         out_position = float4(0, 0, 0, 0);
@@ -46,6 +54,7 @@ void main(
         return;
     }
 
+    // 6 vertices per splat (2 triangles = 1 quad)
     float2 quadCorners[6] = {
         float2(-RADIUS_SIGMA_OVER_SQRT_2, -RADIUS_SIGMA_OVER_SQRT_2),
         float2( RADIUS_SIGMA_OVER_SQRT_2, -RADIUS_SIGMA_OVER_SQRT_2),
@@ -55,12 +64,15 @@ void main(
         float2( RADIUS_SIGMA_OVER_SQRT_2,  RADIUS_SIGMA_OVER_SQRT_2)
     };
 
+    // Apply 2x2 transform to corner offset
     float2 ndcOffset = mul(float2x2(splatTransform.x, splatTransform.y, splatTransform.z, splatTransform.w), quadCorners[vertexID % 6]);
+    // Pixel to NDC (the x2 for NDC [-1,1] range is already baked into two_focal_length)
     ndcOffset /= CSGaussianGetResolution();
 
     out_position = float4(posClip.xy + ndcOffset * posClip.w, posClip.z, posClip.w);
     out_gaussianUV = quadCorners[vertexID % 6];
 
+    // Color from SH0 + opacity
     float3 color = ReadColorSH0(SH0Texture, gaussianIdx, texture_width) * brightness;
     float opacity = ReadOpacity(Cov2OpacityTexture, gaussianIdx, texture_width);
     out_color = float4(color, opacity);
