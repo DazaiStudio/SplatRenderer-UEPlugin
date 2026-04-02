@@ -10,17 +10,20 @@
   </p>
 </p>
 
-<p align="center">
+<table align="center"><tr>
+<td align="center">
   <a href="https://youtu.be/eeR5QMQA7co">
     <img src="docs/demo-preview.gif" alt="3DGS/4DGS Demo" width="345">
-  </a>
+  </a><br>
+  <a href="https://youtu.be/eeR5QMQA7co"><b>3DGS/4DGS Demo</b></a>
+</td>
+<td align="center">
   <a href="https://youtu.be/TuQ8yua705U">
     <img src="docs/demo-sequencer.gif" alt="Sequencer Demo" width="345">
-  </a>
-  <br>
-  <a href="https://youtu.be/eeR5QMQA7co"><b>3DGS/4DGS Demo</b></a> &nbsp;|&nbsp;
+  </a><br>
   <a href="https://youtu.be/TuQ8yua705U"><b>Sequencer Demo</b></a>
-</p>
+</td>
+</tr></table>
 
 ---
 
