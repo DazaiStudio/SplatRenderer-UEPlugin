@@ -11,11 +11,15 @@
 </p>
 
 <p align="center">
+  <a href="https://youtu.be/eeR5QMQA7co">
+    <img src="docs/demo-preview.gif" alt="3DGS/4DGS Demo" width="345">
+  </a>
   <a href="https://youtu.be/TuQ8yua705U">
-    <img src="docs/demo-preview.gif" alt="Demo Video" width="700">
+    <img src="docs/demo-sequencer.gif" alt="Sequencer Demo" width="345">
   </a>
   <br>
-  <a href="https://youtu.be/TuQ8yua705U"><b>Watch Full Demo on YouTube</b></a>
+  <a href="https://youtu.be/eeR5QMQA7co"><b>3DGS/4DGS Demo</b></a> &nbsp;|&nbsp;
+  <a href="https://youtu.be/TuQ8yua705U"><b>Sequencer Demo</b></a>
 </p>
 
 ---
