@@ -11,11 +11,11 @@
 </p>
 
 <p align="center">
-  <a href="https://youtu.be/eeR5QMQA7co">
+  <a href="https://youtu.be/TuQ8yua705U">
     <img src="docs/demo-preview.gif" alt="Demo Video" width="700">
   </a>
   <br>
-  <a href="https://youtu.be/eeR5QMQA7co"><b>Watch Full Demo on YouTube</b></a>
+  <a href="https://youtu.be/TuQ8yua705U"><b>Watch Full Demo on YouTube</b></a>
 </p>
 
 ---
