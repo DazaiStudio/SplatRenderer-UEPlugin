@@ -1,6 +1,6 @@
 #include "/Engine/Public/Platform.ush"
 #include "/Engine/Private/Random.ush"
-#include "CSGaussianCommon.ush"
+#include "SplatCommon.ush"
 
 Texture2D<float4> PositionTexture;
 uint texture_width;

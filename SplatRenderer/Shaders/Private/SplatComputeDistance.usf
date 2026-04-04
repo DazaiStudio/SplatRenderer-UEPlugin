@@ -1,5 +1,5 @@
 #include "/Engine/Public/Platform.ush"
-#include "CSGaussianCommon.ush"
+#include "SplatCommon.ush"
 
 Texture2D<float4> PositionTexture;
 Buffer<float4> displaced_positions;

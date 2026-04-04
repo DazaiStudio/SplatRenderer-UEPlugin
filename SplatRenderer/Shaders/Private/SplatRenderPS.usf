@@ -1,5 +1,5 @@
 #include "/Engine/Public/Platform.ush"
-#include "CSGaussianCommon.ush"
+#include "SplatCommon.ush"
 
 void main(
     in float2 gaussianUV : GAUSSIAN_UV,
